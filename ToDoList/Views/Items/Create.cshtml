@@ -2,13 +2,16 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Item
+@using ToDoList.Models;
+@model List<ToDoList.Models.Item>;
 
-<h4>Add a new task</h4>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Description)
-    @Html.TextBoxFor(model => model.Description)
-    <input type="submit" value="Add new task" />
-}
-<p>@Html.ActionLink("Show all items", "Index")</p>
+<h1>Items</h1>
+
+<ul>
+  @foreach(Item item in Model)
+  {
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new item", "Create")</p>
