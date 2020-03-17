@@ -13,6 +13,11 @@ namespace ToDoList.Controllers
     {
       _db = db;
     }
+    public ActionResult Details(int id)
+    {
+    Item thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+    return View(thisItem);
+    }
 
     public ActionResult Index()
     {
