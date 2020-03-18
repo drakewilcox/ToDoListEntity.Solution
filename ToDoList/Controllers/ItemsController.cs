@@ -21,7 +21,7 @@ namespace ToDoList.Controllers
 
     public ActionResult Index()
     {
-      List<Item> model = _db.Items.ToList();
+      List<Item> model = _db.Items.Include(items => items.Category).ToList();
       return View(model);
     }
     public ActionResult Create()
@@ -63,6 +63,7 @@ namespace ToDoList.Controllers
     _db.SaveChanges();
     return RedirectToAction("Index");
     }
+
 
   }
 }
